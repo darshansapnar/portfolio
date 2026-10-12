@@ -1,1 +1,47 @@
 @import "tailwindcss";
+
+:root {
+  --bg-gradient: linear-gradient(180deg, #3B0D10 0%, #200609 48%, #080304 100%);
+  --brand-red: #E50914;
+  --brand-red-hover: #b80710;
+  --text-primary: #FFFFFF;
+  --text-muted: #B3B3B3;
+  --text-dim: #808080;
+}
+
+@theme {
+  --color-brand-red: #E50914;
+  --color-brand-red-hover: #b80710;
+  --color-netflix-bg-top: #3B0D10;
+  --color-netflix-bg-mid: #200609;
+  --color-netflix-bg-bottom: #080304;
+  --color-netflix-gray: #B3B3B3;
+  --color-netflix-dim: #808080;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #080304;
+  background-image: linear-gradient(180deg, #3B0D10 0%, #200609 48%, #080304 100%);
+  background-attachment: fixed;
+  color: #FFFFFF;
+  overflow-x: hidden;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible reduced-motion handling */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
