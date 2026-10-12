@@ -128,8 +128,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Temporary invisible anchor for View Projects navigation */}
-      <div id="projects" tabIndex={-1} className="sr-only" aria-hidden="true" />
     </section>
   );
 }

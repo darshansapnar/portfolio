@@ -1,5 +1,11 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+import TechStack from "@/components/TechStack";
+import Education from "@/components/Education";
+import AboutMe from "@/components/AboutMe";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Darshan Sapnar | Developer Portfolio",
@@ -14,10 +20,18 @@ export default function HomePage() {
         <Header showSkipIntro={true} skipIntroHref="#projects" />
       </div>
 
-      {/* Hero Landing Page */}
-      <main className="w-full min-h-screen">
+      {/* Hero, Projects, Tech Stack, Education, About Me & Contact Sections */}
+      <main className="w-full">
         <Hero />
+        <Projects />
+        <TechStack />
+        <Education />
+        <AboutMe />
+        <Contact />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
