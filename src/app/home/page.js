@@ -4,6 +4,7 @@ import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
 import Education from "@/components/Education";
 import AboutMe from "@/components/AboutMe";
+import TechnicalWriting from "@/components/TechnicalWriting";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -15,18 +16,17 @@ export const metadata = {
 export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full bg-[#080808] overflow-x-hidden">
-      {/* Header positioned over hero background */}
-      <div className="absolute top-0 left-0 right-0 z-30 pointer-events-auto">
-        <Header showSkipIntro={true} skipIntroHref="#projects" />
-      </div>
+      {/* Fixed navigation header */}
+      <Header showNav={true} showSkipIntro={true} skipIntroHref="#projects" />
 
-      {/* Hero, Projects, Tech Stack, Education, About Me & Contact Sections */}
+      {/* Hero, Projects, Tech Stack, Education, About Me, Technical Writing & Contact Sections */}
       <main className="w-full">
         <Hero />
         <Projects />
         <TechStack />
         <Education />
         <AboutMe />
+        <TechnicalWriting />
         <Contact />
       </main>
 

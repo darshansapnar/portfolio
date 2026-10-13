@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ShieldCheck,
   KeyRound,
@@ -19,6 +19,7 @@ import {
 
 /**
  * Visual Showcase Compositions for each project type
+ * Clean, restrained Netflix-inspired aesthetics without spinning or excessive glow.
  */
 function ProjectVisual({ type, number }) {
   if (type === "auth") {
@@ -44,16 +45,16 @@ function ProjectVisual({ type, number }) {
           {number}
         </span>
 
-        {/* Interactive / Scaling composition */}
-        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
-          {/* Dashed outer security ring */}
+        {/* Restrained Scaling composition on hover */}
+        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-300 ease-out group-hover:scale-[1.03]">
+          {/* Dashed outer security ring (clean static ring) */}
           <div
-            className="absolute w-28 h-28 rounded-full border border-[#E50914]/20 border-dashed animate-[spin_30s_linear_infinite]"
+            className="absolute w-28 h-28 rounded-full border border-[#E50914]/25 border-dashed"
             aria-hidden="true"
           />
 
           {/* Central Shield Icon Badge */}
-          <div className="w-14 h-14 rounded-2xl bg-[#E50914]/15 border border-[#E50914]/40 flex items-center justify-center shadow-lg shadow-[#E50914]/15 mb-2 backdrop-blur-sm">
+          <div className="w-14 h-14 rounded-2xl bg-[#E50914]/15 border border-[#E50914]/40 flex items-center justify-center shadow-lg shadow-black/40 mb-2 backdrop-blur-sm">
             <ShieldCheck className="w-7 h-7 text-[#E50914]" />
           </div>
 
@@ -101,18 +102,18 @@ function ProjectVisual({ type, number }) {
           {number}
         </span>
 
-        {/* Live status badge top-left */}
+        {/* Status badge top-left */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/60 border border-red-500/30 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E50914] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E50914]" />
           <span className="text-[9px] font-bold tracking-wider text-red-300 uppercase">
             LIVEKIT WebRTC
           </span>
         </div>
 
-        {/* Interactive / Scaling composition */}
-        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
+        {/* Restrained Scaling composition on hover */}
+        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-300 ease-out group-hover:scale-[1.03]">
           {/* Central Video Icon Badge */}
-          <div className="w-14 h-14 rounded-2xl bg-[#93112a]/20 border border-[#b81d38]/40 flex items-center justify-center shadow-lg shadow-[#b81d38]/15 mb-2 backdrop-blur-sm">
+          <div className="w-14 h-14 rounded-2xl bg-[#93112a]/20 border border-[#b81d38]/40 flex items-center justify-center shadow-lg shadow-black/40 mb-2 backdrop-blur-sm">
             <Video className="w-7 h-7 text-[#ff3355]" />
           </div>
 
@@ -177,10 +178,10 @@ function ProjectVisual({ type, number }) {
           </span>
         </div>
 
-        {/* Interactive / Scaling composition */}
-        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
+        {/* Restrained Scaling composition on hover */}
+        <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-300 ease-out group-hover:scale-[1.03]">
           {/* Central CPU Icon Badge */}
-          <div className="w-14 h-14 rounded-2xl bg-[#E50914]/15 border border-[#E50914]/40 flex items-center justify-center shadow-lg shadow-[#E50914]/15 mb-2 backdrop-blur-sm">
+          <div className="w-14 h-14 rounded-2xl bg-[#E50914]/15 border border-[#E50914]/40 flex items-center justify-center shadow-lg shadow-black/40 mb-2 backdrop-blur-sm">
             <Cpu className="w-7 h-7 text-[#E50914]" />
           </div>
 
@@ -236,10 +237,10 @@ function ProjectVisual({ type, number }) {
         </span>
       </div>
 
-      {/* Interactive / Scaling composition */}
-      <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
+      {/* Restrained Scaling composition on hover */}
+      <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-300 ease-out group-hover:scale-[1.03]">
         {/* Central Smartphone Icon Badge */}
-        <div className="w-14 h-14 rounded-2xl bg-[#a32214]/20 border border-[#c23321]/40 flex items-center justify-center shadow-lg shadow-[#c23321]/15 mb-2 backdrop-blur-sm">
+        <div className="w-14 h-14 rounded-2xl bg-[#a32214]/20 border border-[#c23321]/40 flex items-center justify-center shadow-lg shadow-black/40 mb-2 backdrop-blur-sm">
           <Smartphone className="w-7 h-7 text-[#ff5533]" />
         </div>
 
@@ -266,21 +267,27 @@ function ProjectVisual({ type, number }) {
 
 /**
  * Reusable ProjectCard Component
+ * Consistent subtle lift, restrained visual zoom, and border highlight across all 4 cards.
  */
 export default function ProjectCard({ project, index = 0 }) {
+  const shouldReduceMotion = useReducedMotion();
   const { number, title, category, description, tags, type } = project;
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-      className="group relative flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1.5 transition-all duration-300 shadow-lg shadow-black/40 hover:shadow-2xl hover:shadow-[#E50914]/10 overflow-hidden cursor-default select-text"
+      transition={{
+        duration: shouldReduceMotion ? 0 : 0.45,
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+        ease: [0.25, 0.1, 0.25, 1.0],
+      }}
+      className="group relative flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1.5 transition-all duration-300 ease-out shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/70 overflow-hidden cursor-default select-text"
       aria-label={`${title} - ${category}`}
     >
       {/* Top Number Badge Pill */}
-      <div className="absolute top-3 right-3 z-20 font-mono text-xs font-bold tracking-wider text-white/50 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 group-hover:text-white group-hover:border-[#E50914]/50 transition-colors">
+      <div className="absolute top-3 right-3 z-20 font-mono text-xs font-bold tracking-wider text-white/50 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 group-hover:text-white group-hover:border-[#E50914]/50 transition-colors duration-200">
         {number}
       </div>
 
@@ -315,7 +322,7 @@ export default function ProjectCard({ project, index = 0 }) {
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] font-medium text-zinc-300 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/[0.06] group-hover:border-white/[0.12] transition-colors"
+                className="text-[11px] font-medium text-zinc-300 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/[0.06] group-hover:border-white/[0.12] transition-colors duration-200"
               >
                 {tag}
               </span>

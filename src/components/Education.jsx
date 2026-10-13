@@ -1,9 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
 export default function Education() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="education"
@@ -16,13 +18,16 @@ export default function Education() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
           className="mb-10 sm:mb-12"
         >
           {/* Eyebrow Accent */}
@@ -46,14 +51,17 @@ export default function Education() {
 
         {/* Compact Education Card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-30px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-7 p-6 sm:p-8 rounded-2xl bg-[#121215] border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-black/40 select-text"
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
+          className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-7 p-6 sm:p-8 rounded-2xl bg-[#121215] border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1 transition-all duration-300 ease-out shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/60 select-text"
         >
           {/* Graduation Cap Icon Badge */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 group-hover:scale-105 shrink-0 transition-all duration-300 shadow-md shadow-[#E50914]/5">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 group-hover:scale-105 shrink-0 transition-all duration-300 ease-out shadow-md shadow-[#E50914]/5">
             <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 text-[#E50914]" />
           </div>
 

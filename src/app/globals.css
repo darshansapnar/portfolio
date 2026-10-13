@@ -19,6 +19,14 @@
   --color-netflix-dim: #808080;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 html,
 body {
   margin: 0;

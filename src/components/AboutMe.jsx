@@ -1,45 +1,47 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Layers,
   Sparkles,
   ShieldCheck,
   Brain,
-  Terminal,
+  Compass,
 } from "lucide-react";
 
 /**
- * Development interests and approach highlights
+ * Four Personal Highlights
  */
 const highlights = [
   {
-    id: "fullstack",
-    title: "Full-Stack Development",
-    description: "Building applications with modern JavaScript technologies.",
+    id: "real-products",
+    title: "Building Real Products",
+    description: "Developing full-stack applications that solve practical problems.",
     icon: Layers,
   },
   {
     id: "ai-infra",
-    title: "AI & Infrastructure",
-    description: "Exploring LLM APIs, intelligent routing, caching, and AI-powered products.",
+    title: "Exploring AI Infrastructure",
+    description: "Working with LLM APIs, intelligent routing, and caching systems.",
     icon: Sparkles,
   },
   {
-    id: "systems-auth",
-    title: "Systems & Authentication",
-    description: "Learning about identity systems, protocols, and backend architecture.",
+    id: "systems",
+    title: "Understanding Systems",
+    description: "Exploring authentication protocols, backend architecture, and computer networks.",
     icon: ShieldCheck,
   },
   {
-    id: "learning",
-    title: "Continuous Learning",
+    id: "learning-practice",
+    title: "Learning Through Practice",
     description: "Strengthening problem-solving skills through DSA and hands-on projects.",
     icon: Brain,
   },
 ];
 
 export default function AboutMe() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="about"
@@ -52,14 +54,17 @@ export default function AboutMe() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-12 sm:mb-16"
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
+          className="mb-10 sm:mb-14"
         >
           {/* Eyebrow Accent */}
           <div className="flex items-center gap-2 mb-3 select-none">
@@ -71,78 +76,85 @@ export default function AboutMe() {
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3">
-            Behind the Code
+            A LITTLE ABOUT ME
           </h2>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-[#B3B3B3] max-w-2xl font-normal">
-            The person behind the projects.
+            Always learning. Always building.
           </p>
         </motion.div>
 
         {/* Two-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Left Column: Narrative Introduction Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="lg:col-span-6 flex flex-col justify-between bg-[#121215] rounded-2xl border border-white/[0.08] p-6 sm:p-8 md:p-10 shadow-lg shadow-black/40"
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.45,
+              ease: [0.25, 0.1, 0.25, 1.0],
+            }}
+            className="lg:col-span-6 flex flex-col justify-between bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-white/[0.16] transition-all duration-300 ease-out p-6 sm:p-8 md:p-9 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/60 select-text"
           >
             <div>
-              {/* Card Sub-header */}
-              <div className="flex items-center gap-2.5 pb-4 mb-6 border-b border-white/[0.06]">
+              {/* Card Sub-header / Panel Label */}
+              <div className="flex items-center gap-2.5 pb-4 mb-5 border-b border-white/[0.06]">
                 <div className="w-8 h-8 rounded-lg bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914]">
-                  <Terminal className="w-4 h-4" />
+                  <Compass className="w-4 h-4" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold tracking-wider text-zinc-300 uppercase">
-                  Engineering Philosophy
+                  INTRODUCTION
                 </span>
               </div>
 
               {/* Introduction Body */}
               <div className="space-y-4">
                 <p className="text-base sm:text-lg text-white font-medium leading-relaxed">
-                  I&apos;m a final-year B.Tech Information Technology student interested in software engineering, full-stack development, and AI infrastructure.
+                  I&apos;m a final-year B.Tech Information Technology student passionate about software engineering, full-stack development, and AI infrastructure.
                 </p>
                 <p className="text-sm sm:text-base text-[#B3B3B3] leading-relaxed font-normal">
-                  I enjoy building practical products, exploring how systems work behind the scenes, and learning by implementing real projects.
+                  I enjoy turning ideas into working products, understanding how systems operate behind the scenes, and learning through hands-on development.
                 </p>
               </div>
             </div>
 
-            {/* Bottom Focus Callout */}
-            <div className="mt-8 pt-6 border-t border-white/[0.06]">
+            {/* Bottom Highlight Callout */}
+            <div className="mt-6 pt-5 border-t border-white/[0.06]">
               <div className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E50914] mt-2 shrink-0" aria-hidden="true" />
-                <p className="text-xs sm:text-sm text-zinc-400 font-mono leading-relaxed">
-                  Building with purpose — clean architectures, reliable services, and intuitive interfaces.
+                <p className="text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed">
+                  Focused on clean architecture, practical problem-solving, and continuous improvement.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Highlights Stack */}
-          <div className="lg:col-span-6 flex flex-col justify-between gap-4">
+          {/* Right Column: Four Personal Highlights */}
+          <div className="lg:col-span-6 flex flex-col justify-between gap-3.5 sm:gap-4">
             {highlights.map((item, index) => {
               const Icon = item.icon;
 
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
-                  className="group flex items-start gap-4 p-5 sm:p-6 rounded-2xl bg-[#121215] border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-0.5 transition-all duration-200 shadow-md shadow-black/30 select-text"
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.45,
+                    delay: shouldReduceMotion ? 0 : index * 0.06,
+                    ease: [0.25, 0.1, 0.25, 1.0],
+                  }}
+                  className="group flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-[#121215] border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1 transition-all duration-300 ease-out shadow-md shadow-black/30 hover:shadow-lg hover:shadow-black/50 select-text"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 shrink-0 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 shrink-0 transition-colors duration-200">
                     <Icon className="w-5 h-5" />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight group-hover:text-white transition-colors">
+                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight group-hover:text-white transition-colors duration-200">
                       {item.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#B3B3B3] leading-relaxed mt-1 font-normal">

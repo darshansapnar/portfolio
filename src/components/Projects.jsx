@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 /**
  * Static project entries stored in a local JavaScript array
- * Easy to extend with links, media, and updated tags later.
  */
 const projects = [
   {
@@ -51,11 +50,13 @@ const projects = [
 ];
 
 export default function Projects() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="projects"
       aria-label="Featured Projects Section"
-      className="relative w-full bg-[#080808] py-20 sm:py-24 md:py-28 px-5 sm:px-12 md:px-16 lg:px-20 overflow-hidden"
+      className="relative w-full bg-[#080808] pt-10 sm:pt-14 md:pt-16 pb-20 sm:pb-24 md:pb-28 px-5 sm:px-12 md:px-16 lg:px-20 overflow-hidden"
     >
       {/* Subtle top ambient crimson glow */}
       <div
@@ -63,13 +64,16 @@ export default function Projects() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
           className="mb-12 sm:mb-16"
         >
           {/* Eyebrow Accent */}
@@ -91,7 +95,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* 4-Card Responsive Grid (Horizontal 4-card row on desktop, 2-cols on tablet, 1-col on mobile) */}
+        {/* 4-Card Responsive Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {projects.map((project, index) => (
             <ProjectCard

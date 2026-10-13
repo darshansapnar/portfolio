@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Mail, Copy, Check, ExternalLink } from "lucide-react";
 
 /**
@@ -24,6 +24,7 @@ function GithubIcon(props) {
 }
 
 export default function Contact() {
+  const shouldReduceMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
   const emailAddress = "sapnardarshan18@gmail.com";
 
@@ -33,7 +34,6 @@ export default function Contact() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback if clipboard API is restricted
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -51,13 +51,16 @@ export default function Contact() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 w-full max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="relative bg-[#121215]/90 border border-white/[0.08] rounded-3xl p-8 sm:p-12 md:p-16 text-center shadow-2xl shadow-black/60 backdrop-blur-md"
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
+          className="relative bg-[#121215]/90 border border-white/[0.08] hover:border-white/[0.14] rounded-3xl p-8 sm:p-12 md:p-16 text-center shadow-2xl shadow-black/60 backdrop-blur-md transition-colors duration-300"
         >
           {/* Eyebrow Accent */}
           <div className="inline-flex items-center gap-2 mb-4 select-none">
@@ -87,7 +90,7 @@ export default function Contact() {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.08] hover:bg-white/[0.15] text-[11px] font-medium text-zinc-200 hover:text-white transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#E50914]"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 text-[11px] font-medium text-zinc-200 hover:text-white transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#E50914]"
                 aria-label="Copy email address to clipboard"
               >
                 {copied ? (
@@ -109,8 +112,10 @@ export default function Contact() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             {/* Primary Email Button */}
             <a
-              href="mailto:sapnardarshan18@gmail.com"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#E50914] hover:bg-[#b80710] active:scale-[0.98] text-white text-sm sm:text-base font-semibold rounded-md shadow-lg shadow-black/40 transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=sapnardarshan18%40gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#E50914] hover:bg-[#b80710] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#E50914]/25 active:translate-y-0 active:scale-[0.98] text-white text-sm sm:text-base font-semibold rounded-md shadow-lg shadow-black/40 transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <Mail className="w-4 h-4" />
               <span>Send Me an Email</span>
@@ -121,7 +126,7 @@ export default function Contact() {
               href="https://github.com/darshansapnar"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black/50 hover:bg-white/10 active:scale-[0.98] text-white text-sm sm:text-base font-medium rounded-md border border-[#333333] hover:border-white/50 backdrop-blur-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black/50 hover:bg-white/10 hover:border-white/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] text-white text-sm sm:text-base font-medium rounded-md border border-[#333333] backdrop-blur-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               aria-label="GitHub Profile (opens in a new tab)"
             >
               <GithubIcon className="w-4 h-4" />
@@ -134,7 +139,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/darshansapnar/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black/50 hover:bg-white/10 active:scale-[0.98] text-white text-sm sm:text-base font-medium rounded-md border border-[#333333] hover:border-white/50 backdrop-blur-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black/50 hover:bg-white/10 hover:border-white/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] text-white text-sm sm:text-base font-medium rounded-md border border-[#333333] backdrop-blur-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               aria-label="LinkedIn Profile (opens in a new tab)"
             >
               <LinkedinIcon className="w-4 h-4" />

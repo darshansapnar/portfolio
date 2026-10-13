@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Code2,
   Layout,
@@ -12,7 +12,6 @@ import {
 
 /**
  * Skill categories and technologies stored in a local JavaScript data structure.
- * Exactly 6 categories with their exact technologies.
  */
 const techCategories = [
   {
@@ -58,8 +57,8 @@ const techCategories = [
     icon: Database,
     skills: [
       "MySQL",
-      "MongoDB",
       "PostgreSQL",
+      "MongoDB",
       "Prisma ORM",
       "Redis",
     ],
@@ -71,22 +70,18 @@ const techCategories = [
     skills: [
       "Git",
       "GitHub",
-      "GitHub Actions",
-      "npm Workspaces",
-      "VS Code",
       "Docker",
       "Postman",
-      "Jupyter Notebook",
-      "Chrome DevTools",
+      "Linux",
+      "Vercel",
     ],
   },
   {
-    id: "cs",
+    id: "cs-fundamentals",
     title: "Core Computer Science",
     icon: Binary,
     skills: [
       "Data Structures & Algorithms",
-      "Object-Oriented Programming (OOP)",
       "Problem Solving",
       "Operating Systems",
       "Computer Networks",
@@ -111,7 +106,7 @@ function TechTile({ name }) {
         className="w-1.5 h-1.5 rounded-full bg-zinc-600 group-hover/tile:bg-[#E50914] group-hover/tile:scale-125 transition-all duration-200"
         aria-hidden="true"
       />
-      <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover/tile:text-white transition-colors">
+      <span className="text-xs sm:text-sm font-medium text-zinc-300 group-hover/tile:text-white transition-colors duration-200">
         {name}
       </span>
     </div>
@@ -119,6 +114,8 @@ function TechTile({ name }) {
 }
 
 export default function TechStack() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="tech-stack"
@@ -131,13 +128,16 @@ export default function TechStack() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            ease: [0.25, 0.1, 0.25, 1.0],
+          }}
           className="mb-12 sm:mb-16"
         >
           {/* Eyebrow Accent */}
@@ -167,16 +167,20 @@ export default function TechStack() {
             return (
               <motion.div
                 key={category.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
-                className="group flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-white/[0.16] hover:-translate-y-1 transition-all duration-300 p-6 sm:p-7 shadow-lg shadow-black/40"
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.45,
+                  delay: shouldReduceMotion ? 0 : index * 0.06,
+                  ease: [0.25, 0.1, 0.25, 1.0],
+                }}
+                className="group flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-[#E50914]/30 hover:-translate-y-1 transition-all duration-300 ease-out p-6 sm:p-7 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/60"
               >
                 {/* Category Header */}
                 <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/[0.06]">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-[#E50914]/10 border border-[#E50914]/20 flex items-center justify-center text-[#E50914] group-hover:border-[#E50914]/40 transition-colors duration-200">
                       <Icon className="w-4 h-4" />
                     </div>
                     <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
