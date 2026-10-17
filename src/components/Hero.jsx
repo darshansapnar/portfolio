@@ -135,6 +135,7 @@ export default function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              download="Darshan_Sapnar_Resume.pdf"
               className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 bg-black/50 hover:bg-white/10 hover:border-white/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] text-white text-sm sm:text-base font-medium rounded-md border border-[#333333] backdrop-blur-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white select-none"
             >
               <span>Download Resume</span>
