@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ShieldCheck,
@@ -15,13 +16,66 @@ import {
   Receipt,
   Wallet,
   Split,
+  ExternalLink,
+  Download,
 } from "lucide-react";
 
 /**
- * Visual Showcase Compositions for each project type
- * Clean, restrained Netflix-inspired aesthetics without spinning or excessive glow.
+ * Custom inline SVG icon for GitHub
  */
-function ProjectVisual({ type, number }) {
+function GithubIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+/**
+ * Visual Showcase Compositions for each project type
+ * Displays project screenshot image if provided, with fallback to stylized SVG visual.
+ */
+function ProjectVisual({ type, number, image, title }) {
+  if (image) {
+    const objectPos =
+      type === "mobile"
+        ? "object-top"
+        : type === "ai"
+        ? "object-top"
+        : "object-center";
+
+    return (
+      <div className="relative w-full h-44 sm:h-48 overflow-hidden bg-[#0c0c0e] border-b border-white/[0.06] flex items-center justify-center">
+        {/* Subtle grid pattern background */}
+        <div
+          className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#E50914_1px,transparent_1px)] [background-size:16px_16px] z-0"
+          aria-hidden="true"
+        />
+
+        {/* Ambient radial glow on hover */}
+        <div
+          className="absolute inset-0 bg-radial from-[#E50914]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10"
+          aria-hidden="true"
+        />
+
+        {/* Project Screenshot Image with smooth zoom on hover */}
+        <Image
+          src={image}
+          alt={`${title} screenshot`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          priority={number === "01" || number === "02"}
+          className={`object-cover ${objectPos} transition-transform duration-500 ease-out group-hover:scale-105`}
+        />
+
+        {/* Subtle dark gradient overlay at top and bottom for contrast and seamless transition */}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-black/35 pointer-events-none z-10"
+          aria-hidden="true"
+        />
+      </div>
+    );
+  }
   if (type === "auth") {
     return (
       <div className="relative w-full h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-[#24080b] via-[#150709] to-[#0c0c0e] flex items-center justify-center border-b border-white/[0.06]">
@@ -271,7 +325,8 @@ function ProjectVisual({ type, number }) {
  */
 export default function ProjectCard({ project, index = 0 }) {
   const shouldReduceMotion = useReducedMotion();
-  const { number, title, category, description, tags, type } = project;
+  const { number, title, category, description, tags, type, image, githubUrl, liveUrl, apkUrl } = project;
+  const primaryUrl = liveUrl || apkUrl || githubUrl;
 
   return (
     <motion.article
@@ -283,16 +338,28 @@ export default function ProjectCard({ project, index = 0 }) {
         delay: shouldReduceMotion ? 0 : index * 0.08,
         ease: [0.25, 0.1, 0.25, 1.0],
       }}
-      className="group relative flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1.5 transition-all duration-300 ease-out shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/70 overflow-hidden cursor-default select-text"
+      className="group relative flex flex-col h-full bg-[#121215] rounded-2xl border border-white/[0.08] hover:border-[#E50914]/40 hover:-translate-y-1.5 transition-all duration-300 ease-out shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-black/70 overflow-hidden select-text"
       aria-label={`${title} - ${category}`}
     >
       {/* Top Number Badge Pill */}
-      <div className="absolute top-3 right-3 z-20 font-mono text-xs font-bold tracking-wider text-white/50 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 group-hover:text-white group-hover:border-[#E50914]/50 transition-colors duration-200">
+      <div className="absolute top-3 right-3 z-20 font-mono text-xs font-bold tracking-wider text-white/50 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 group-hover:text-white group-hover:border-[#E50914]/50 transition-colors duration-200 pointer-events-none">
         {number}
       </div>
 
       {/* Visual Showcase Banner */}
-      <ProjectVisual type={type} number={number} />
+      {primaryUrl ? (
+        <a
+          href={primaryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E50914]"
+          aria-label={`Open ${title} (${liveUrl ? "Live Demo" : apkUrl ? "Download APK" : "GitHub"})`}
+        >
+          <ProjectVisual type={type} number={number} image={image} title={title} />
+        </a>
+      ) : (
+        <ProjectVisual type={type} number={number} image={image} title={title} />
+      )}
 
       {/* Card Content Body */}
       <div className="flex-1 flex flex-col justify-between p-5 sm:p-6">
@@ -306,8 +373,20 @@ export default function ProjectCard({ project, index = 0 }) {
           </div>
 
           {/* Project Name */}
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2.5 group-hover:text-white transition-colors">
-            {title}
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2.5">
+            {primaryUrl ? (
+              <a
+                href={primaryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#E50914] transition-colors inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E50914] rounded-sm group/title"
+              >
+                <span>{title}</span>
+                <ExternalLink className="w-4 h-4 opacity-0 -translate-x-1 group-hover/title:opacity-100 group-hover/title:translate-x-0 transition-all text-[#E50914]" />
+              </a>
+            ) : (
+              title
+            )}
           </h3>
 
           {/* Description */}
@@ -316,8 +395,8 @@ export default function ProjectCard({ project, index = 0 }) {
           </p>
         </div>
 
-        {/* Technology Tags - pinned to bottom */}
-        <div className="pt-5 border-t border-white/[0.06] mt-6">
+        {/* Technology Tags & Action Buttons - pinned to bottom */}
+        <div className="pt-5 border-t border-white/[0.06] mt-6 flex flex-col gap-4">
           <div className="flex flex-wrap gap-1.5" aria-label="Technologies used">
             {tags.map((tag) => (
               <span
@@ -328,6 +407,53 @@ export default function ProjectCard({ project, index = 0 }) {
               </span>
             ))}
           </div>
+
+          {/* Action Links */}
+          {(liveUrl || apkUrl || githubUrl) && (
+            <div className="flex items-center gap-2 pt-3 border-t border-white/[0.04]">
+              {/* Primary Action: Live Demo */}
+              {liveUrl && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#E50914] hover:bg-[#b80710] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#E50914]/25 active:translate-y-0 active:scale-[0.98] text-white text-xs font-semibold rounded-lg shadow-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label={`Open live demo for ${title} (opens in a new tab)`}
+                >
+                  <span>Live Demo</span>
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                </a>
+              )}
+
+              {/* Primary Action: Download APK */}
+              {apkUrl && (
+                <a
+                  href={apkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#E50914] hover:bg-[#b80710] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#E50914]/25 active:translate-y-0 active:scale-[0.98] text-white text-xs font-semibold rounded-lg shadow-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label={`Download APK for ${title} (opens in a new tab)`}
+                >
+                  <Download className="w-3.5 h-3.5 shrink-0" />
+                  <span>Download APK</span>
+                </a>
+              )}
+
+              {/* Secondary Action: GitHub */}
+              {githubUrl && (
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white/[0.05] hover:bg-white/[0.12] hover:border-white/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] text-zinc-300 hover:text-white text-xs font-medium rounded-lg border border-white/[0.08] backdrop-blur-sm transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label={`View GitHub repository for ${title} (opens in a new tab)`}
+                >
+                  <GithubIcon className="w-3.5 h-3.5 shrink-0" />
+                  <span>GitHub</span>
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.article>

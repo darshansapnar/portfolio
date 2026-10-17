@@ -45,7 +45,7 @@ export default function Education() {
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-[#B3B3B3] max-w-2xl font-normal">
-            Formal education in engineering and technology.
+            My academic journey so far.
           </p>
         </motion.div>
 
@@ -75,6 +75,12 @@ export default function Education() {
             {/* Secondary Text: College Name */}
             <p className="text-sm sm:text-base md:text-lg text-[#B3B3B3] font-normal leading-relaxed">
               K.K. Wagh Institute of Engineering Education and Research, Nashik
+            </p>
+
+            {/* Passing Year */}
+            <p className="text-xs sm:text-sm md:text-base text-zinc-400 font-medium mt-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E50914]" aria-hidden="true" />
+              <span>Passing Year: 2027</span>
             </p>
           </div>
         </motion.div>

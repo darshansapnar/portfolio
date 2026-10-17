@@ -16,6 +16,9 @@ const projects = [
       "A self-hosted OpenID Connect identity provider designed to provide secure authentication and authorization for applications.",
     tags: ["Node.js", "Express.js", "React", "PostgreSQL", "Prisma", "JOSE"],
     type: "auth",
+    image: "/images/projects/dauth.png",
+    githubUrl: "https://github.com/darshansapnar/DAuth---OpenIDConnect-server",
+    liveUrl: "https://sample-client-five.vercel.app/",
   },
   {
     id: "relay",
@@ -26,6 +29,9 @@ const projects = [
       "An AI-powered video conferencing platform built for real-time video meetings, audio communication, and screen sharing, with planned AI-powered transcription, meeting summaries, and action items.",
     tags: ["React", "Node.js", "Express.js", "LiveKit"],
     type: "video",
+    image: "/images/projects/relay.png",
+    githubUrl: "https://github.com/darshansapnar/Relay",
+    liveUrl: "https://relay-pi-orpin.vercel.app",
   },
   {
     id: "llm-gateway",
@@ -36,6 +42,9 @@ const projects = [
       "AI infrastructure for intelligent LLM routing, semantic caching, and reduced API costs through optimized request handling.",
     tags: ["JavaScript", "Node.js", "React", "Express.js", "Redis"],
     type: "ai",
+    image: "/images/projects/llm-gateway.png",
+    githubUrl: "https://github.com/darshansapnar/LLM-gateway",
+    liveUrl: "https://llm-gateway-ebon.vercel.app",
   },
   {
     id: "hisaab",
@@ -46,6 +55,9 @@ const projects = [
       "A mobile app designed to simplify shared hostel expense tracking and make everyday expense management easier.",
     tags: ["React Native", "Expo"],
     type: "mobile",
+    image: "/images/projects/hisaab.png",
+    githubUrl: "https://github.com/darshansapnar/hiSaab-App---Expense-Tracker",
+    apkUrl: "https://github.com/darshansapnar/hiSaab-App---Expense-Tracker/releases/tag/v1.0.0",
   },
 ];
 
@@ -86,12 +98,12 @@ export default function Projects() {
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase mb-3">
-            Featured Projects
+            PROJECTS
           </h2>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-[#B3B3B3] max-w-2xl font-normal">
-            A selection of products and infrastructure I&apos;ve built.
+            Projects I&apos;ve built.
           </p>
         </motion.div>
 

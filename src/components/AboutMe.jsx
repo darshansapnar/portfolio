@@ -21,7 +21,7 @@ const highlights = [
   },
   {
     id: "ai-infra",
-    title: "Exploring AI Infrastructure",
+    title: "Building with AI",
     description: "Working with LLM APIs, intelligent routing, and caching systems.",
     icon: Sparkles,
   },

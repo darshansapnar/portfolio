@@ -9,13 +9,13 @@ import { motion } from "framer-motion";
  * ProfileCard component
  * 
  * To replace the avatar image:
- * Simply replace the file at `/public/images/darshan-avatar.jpg`
+ * Simply replace the file at `/public/images/netflix-avatar.png`
  * or pass a custom `imageSrc` prop here.
  */
 export default function ProfileCard({
   name = "Darshan",
   subtitle = "Developer · AI Enthusiast · Builder",
-  imageSrc = "/images/darshan-avatar.jpg",
+  imageSrc = "/images/netflix-avatar.png",
   href = "/home",
 }) {
   const [imageError, setImageError] = useState(false);

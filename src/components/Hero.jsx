@@ -19,7 +19,7 @@ export default function Hero() {
 
   const stats = [
     { value: "3+", label: "Major Projects" },
-    { value: "69+", label: "LeetCode Problems" },
+    { value: "200+", label: "DSA Problems" },
     { value: "5+", label: "Technologies" },
     { value: "∞", label: "Learning" },
   ];

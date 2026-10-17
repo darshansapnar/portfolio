@@ -90,14 +90,14 @@ export default function Header({
     }
   };
 
-  // Intro Page Mode (`/`): Preserve original minimalist header layout
+  // Intro Page Mode (`/`): Minimalist header layout matching reference design
   if (!showNav) {
     return (
       <header className="w-full px-6 py-6 sm:px-12 sm:py-8 md:px-16 flex items-center justify-between select-none z-20">
         {/* Brand Wordmark: Bold Red DS */}
         <Link
-          href="/"
-          className="group inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E50914] focus-visible:ring-offset-2 focus-visible:ring-offset-[#3B0D10] rounded-sm transition-transform duration-200 active:scale-95"
+          href="/home"
+          className="group inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E50914] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080203] rounded-sm transition-transform duration-200 active:scale-95"
           aria-label="Darshan Portfolio Home"
         >
           <span className="text-3xl sm:text-4xl font-black tracking-tight text-[#E50914] transition-opacity duration-200 group-hover:opacity-90">
@@ -105,7 +105,7 @@ export default function Header({
           </span>
         </Link>
 
-        {/* Skip Intro Link */}
+        {/* Enter Portfolio Link with Subtle Red Underline */}
         {showSkipIntro && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -113,11 +113,15 @@ export default function Header({
             transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.1 }}
           >
             <Link
-              href={skipIntroHref}
-              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#B3B3B3] hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded px-2 py-1"
+              href="/home"
+              className="group inline-flex flex-col items-end focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E50914] rounded px-1 py-0.5"
+              aria-label="Enter Portfolio"
             >
-              <span>Skip Intro</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+              <span className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-zinc-300 group-hover:text-white transition-colors duration-200">
+                <span>ENTER PORTFOLIO</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" strokeWidth={2.2} />
+              </span>
+              <span className="w-full h-[1.5px] bg-[#E50914]/80 mt-1 transition-colors duration-200 group-hover:bg-[#E50914]" />
             </Link>
           </motion.div>
         )}
