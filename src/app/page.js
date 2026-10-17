@@ -67,13 +67,9 @@ export default function WelcomePage() {
             <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#E50914]/35 to-transparent" />
           </div>
 
-          {/* Tagline: DEVELOPER · AI · PROBLEM SOLVER */}
+          {/* Tagline: DEVELOPER · PROBLEM SOLVER */}
           <p className="mt-0.5 text-[11px] sm:text-xs md:text-sm font-medium uppercase tracking-[0.24em] sm:tracking-[0.3em] text-[#b0b0b6] flex items-center justify-center flex-wrap">
             <span>DEVELOPER</span>
-            <span className="text-[#E50914]/80 mx-2 sm:mx-3.5 font-bold select-none text-xs">
-              ·
-            </span>
-            <span>AI</span>
             <span className="text-[#E50914]/80 mx-2 sm:mx-3.5 font-bold select-none text-xs">
               ·
             </span>
